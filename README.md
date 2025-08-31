@@ -56,5 +56,4 @@ This is primarily a personal learning journey, but constructive feedback is welc
 
 MIT License – Feel free to use this repository for your own React learning journey or as a reference for teaching others.
 
-> **Philosophy:**  
-> "Deep understanding beats quick completion. This repository prioritizes mastery over speed, building the kind of foundational knowledge that supports a lifetime of effective React development."
+
