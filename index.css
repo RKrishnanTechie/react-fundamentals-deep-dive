@@ -1,3 +1,42 @@
-#heading{
-    color:blueviolet
+.header{
+    display: flex;
+    border: 1px solid black;
+    
 }
+
+.logo{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+   
+    
+}
+
+.brand-name {
+  color: red;
+  font-family: 'Pacifico', cursive; /* Or any font you like */
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 2rem;
+  /* padding-bottom: 20px */
+}
+
+.img{
+    height: 75px;
+    width: 75px;
+     /* margin-bottom: 20px */
+}
+
+.nav{
+   margin: auto 0 auto auto;
+    padding-right: 20px;
+}
+
+.nav-items{
+    display: flex;
+    list-style-type: none;
+   gap: 20px;
+
+    
+}
+

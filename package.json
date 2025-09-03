@@ -18,7 +18,8 @@
   "author": "RK",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.15.4"
+    "parcel": "^2.15.4",
+    "prettier": "3.6.2"
   },
   "dependencies": {
     "react": "^19.1.1",
