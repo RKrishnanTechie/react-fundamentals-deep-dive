@@ -23,10 +23,45 @@ const HeaderComponent = () => {
   );
 };
 
+const BodyComponent = () => {
+  return (
+    <div className="body">    
+      <h2>Search</h2>
+      <div className="restaurant-list">
+        <CardComponent />
+        <CardComponent />
+        <CardComponent />
+        <CardComponent />
+        <CardComponent />
+        <CardComponent />
+        <CardComponent />
+        <CardComponent />
+        <CardComponent />
+        <CardComponent />
+
+      </div>
+
+    </div>
+  );
+}
+
+const CardComponent = () => {
+  return (
+    <div className="card">
+      <img
+        className="card-img"
+        src="https://th.bing.com/th/id/OIP.JNmlSCN5OtbormFEYgJl1wHaEo?w=278&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"/>     <h3>Restaurant Name</h3>
+      <h4>Cuisine</h4>
+      <h4>Ratings</h4>
+    </div>
+  );
+} 
+
 const AppComponent = () => {
   return (
     <div>
       <HeaderComponent />
+      <BodyComponent />
     </div>
   );
 };
