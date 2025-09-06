@@ -65,3 +65,17 @@
     border-radius: 10px;
     object-fit: cover;
 } 
+
+.btn-filter{
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border:none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+.btn-filter:hover{
+    background-color: darkred;
+    border: 1px solid black;
+}

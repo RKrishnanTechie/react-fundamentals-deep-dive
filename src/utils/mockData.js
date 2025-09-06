@@ -4,7 +4,7 @@ const restaurantList = [
     name: "Pizza Palace",
     image:
       "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
-    rating: 4.5,
+    rating: 3.5,
     cuisine: "Italian",
   },
   {
@@ -12,7 +12,7 @@ const restaurantList = [
     name: "Curry Express",
     image:
       "https://media.istockphoto.com/id/1182881229/photo/chicken-tikka-masala.jpg?s=612x612&w=0&k=20&c=hBvSzu1SbkNlLGJLOvb5gXHi4-feEgiy-CBen6IbMas=",
-    rating: 4.2,
+    rating: 3.2,
     cuisine: "Indian",
   },
   {
@@ -20,7 +20,7 @@ const restaurantList = [
     name: "Sushi Central",
     image:
       "https://media.istockphoto.com/id/109836388/photo/sushi.jpg?s=612x612&w=0&k=20&c=hxJOXWEAq1V_9r8EHf26zgvShv26GbhMhlVzgTgv8cw=",
-    rating: 4.8,
+    rating: 2.8,
     cuisine: "Japanese",
   },
   {
@@ -36,7 +36,7 @@ const restaurantList = [
     name: "Tacos Town",
     image:
       "https://plus.unsplash.com/premium_photo-1661730329741-b3bf77019b39?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8VGFjb3N8ZW58MHx8MHx8fDA%3D",
-    rating: 4.7,
+    rating: 3.7,
     cuisine: "Mexican",
   },
   {
@@ -44,7 +44,7 @@ const restaurantList = [
     name: "Green Vegan",
     image:
       "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80",
-    rating: 4.3,
+    rating: 3.3,
     cuisine: "Vegetarian",
   },
   {
@@ -52,7 +52,7 @@ const restaurantList = [
     name: "Noodle House",
     image:
       "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80",
-    rating: 4.6,
+    rating: 3.6,
     cuisine: "Chinese",
   },
   {
@@ -60,7 +60,7 @@ const restaurantList = [
     name: "Steak Station",
     image:
       "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80",
-    rating: 4.4,
+    rating: 3.9,
     cuisine: "Steakhouse",
   },
   {
