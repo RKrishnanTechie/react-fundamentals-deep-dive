@@ -28,13 +28,13 @@
 }
 
 .nav{
-   margin: auto 0 auto auto;
+   margin: auto 0 auto auto; 
     padding-right: 20px;
 }
 
 .nav-items{
     display: flex;
-    list-style-type: none;
+    list-style-type: none; /* removes the bullet points */
    gap: 20px;
 
     
@@ -42,9 +42,9 @@
 
 .restaurant-list{
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    flex-wrap: wrap; /* allows wrapping to next line */
+    gap: 20px; /* space between cards */
+    justify-content: center;  /* centers the cards horizontally */
     padding: 20px;
 }
 
@@ -61,7 +61,7 @@
 
 .card-img{
     height: 200px;
-    width: 100%;
+    width: 100%;  /* important to keep it 100% */
     border-radius: 10px;
     object-fit: cover;
 } 
