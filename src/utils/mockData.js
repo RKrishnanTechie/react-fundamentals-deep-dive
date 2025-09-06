@@ -1,6 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
 const restaurantList = [
   {
     id: "1",
@@ -84,62 +81,4 @@ const restaurantList = [
   },
 ];
 
-const HeaderComponent = () => {
-  return (
-    <div className="header">
-      <div className="logo">
-        <img
-          className="img"
-          src="https://static.vecteezy.com/system/resources/previews/048/067/082/non_2x/biryani-dish-malabar-biryani-with-thalassery-chicken-isolated-illustration-on-a-transparent-background-png.png"
-        />
-        <h3 className="brand-name"> Lets Eat</h3>
-      </div>
-      <div className="nav">
-        <ul className="nav-items">
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-const BodyComponent = () => {
-  return (
-    <div className="body">
-      <h2>Search</h2>
-      <div className="restaurant-list">
-        {restaurantList.map((restaurant) => (
-          <CardComponent key={restaurant.id} resData={restaurant} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const CardComponent = ({ resData }) => {
-  const { name, image, cuisine, rating } = resData;
-  return (
-    <div className="card">
-      <img className="card-img" src={image} />
-      <h3>{name}</h3>
-      <h4> {cuisine}</h4>
-      <h4>{rating} Stars</h4>
-      <button>Order Now</button>
-    </div>
-  );
-};
-
-const AppComponent = () => {
-  return (
-    <div>
-      <HeaderComponent />
-      <BodyComponent />
-    </div>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppComponent />);
+export default restaurantList;
