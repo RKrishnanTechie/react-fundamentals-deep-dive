@@ -1,5 +1,6 @@
 import CardComponent from "./Card";
 import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";    
 
 const BodyComponent = () => {
     const [listOfRestaurants, setListOfRestaurants] = useState([]); // State variable to hold restaurant data
@@ -15,11 +16,9 @@ const BodyComponent = () => {
         setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []); // Update this path after checkiing JSON Viewer Pro extension in your browser
     }
 
-    if(listOfRestaurants.length === 0){
-        return <h1>Loading...</h1>
-    }
+    
 
-    return (
+    return (listOfRestaurants.length === 0)? ( <Shimmer />)  :(
     <div className="body">
     <div className="filter-data">
       <button className="btn-filter" onClick={() => {
