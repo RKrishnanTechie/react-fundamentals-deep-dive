@@ -11,7 +11,7 @@ const BodyComponent = () => {
     },[])
 
     const fetchData = async () => {
-        const data = await fetch("https://swiggy-api-4c740.web.app/swiggy-api.json");
+        const data = await fetch("https://corsproxy.io/?url=https://swiggy-api-4c740.web.app/swiggy-api.json");
         const json = await data.json();
         console.log(json);      
         setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []); // Update this path after checkiing JSON Viewer Pro extension in your browser
