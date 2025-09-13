@@ -2,6 +2,10 @@
 import ReactDOM from "react-dom/client";
 import HeaderComponent from "./components/Header";
 import BodyComponent from "./components/Body";
+import Contact from "./components/Contact";
+import About from "./components/About";
+import Error from "./components/Error";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 
 
@@ -9,7 +13,7 @@ import BodyComponent from "./components/Body";
 
 
 
-const AppComponent = () => {
+const App = () => {
   return (
     <div>
       <HeaderComponent />
@@ -18,5 +22,21 @@ const AppComponent = () => {
   );
 };
 
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  { path: "/contact", 
+    element: <Contact />, 
+  },  
+
+]);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppComponent />);
+root.render(<RouterProvider router={appRouter} />);
