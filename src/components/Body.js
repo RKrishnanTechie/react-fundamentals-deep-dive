@@ -11,12 +11,16 @@ const BodyComponent = () => {
     },[])
 
     const fetchData = async () => {
-        const data = await fetch("https://corsproxy.io/?url=https://swiggy-api-4c740.web.app/swiggy-api.json");
+        try{
+            const data = await fetch("https://corsproxy.io/?url=https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9405997&lng=77.5737633&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING#");
         const json = await data.json();
         console.log(json);      
         setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []); // Update this path after checkiing JSON Viewer Pro extension in your browser
         setFilteredRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []); // filtered list is same as original list at the beginning
-    }
+        } catch (error){
+           console.error("Failed to fetch restaurants:", error);
+        }
+         }
 
     
 
@@ -29,13 +33,14 @@ const BodyComponent = () => {
     
     <button className="btn-search" onClick={() => {
         const filteredList = listOfRestaurants.filter(
-          (res) => (res.info.cuisines.join(",").toLowerCase().includes(searchText.toLowerCase())));
-        setFilteredRestaurants(filteredList);
+    (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()) ||
+             res.info.cuisines.join(",").toLowerCase().includes(searchText.toLowerCase()));
+             setFilteredRestaurants(filteredList);
       }}> Search </button>
 
       <button className="btn-filter" onClick={() => {
         const filteredList = listOfRestaurants.filter(
-          (res) => Number(res.info.avgRating) > 4.3
+          (res) => Number(res.info.avgRating) > 4.5 
         );
         setFilteredRestaurants(filteredList);
       }}>
