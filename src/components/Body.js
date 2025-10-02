@@ -1,6 +1,7 @@
 import CardComponent from "./Card";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";    
+import { SWIGGY_API } from "../utils/constants";
 
 const BodyComponent = () => {
     const [listOfRestaurants, setListOfRestaurants] = useState([]); // State variable to hold restaurant data
@@ -12,7 +13,7 @@ const BodyComponent = () => {
 
     const fetchData = async () => {
         try{
-            const data = await fetch("https://corsproxy.io/?url=https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9405997&lng=77.5737633&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING#");
+            const data = await fetch(SWIGGY_API);
         const json = await data.json();
         console.log(json);      
         setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []); // Update this path after checkiing JSON Viewer Pro extension in your browser
