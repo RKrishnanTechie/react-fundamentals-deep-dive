@@ -1,9 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 
 const RestaurantMenu = () => {
   const [menu, setMenu] = useState(null);
+
+    const { resId } = useParams();
+    console.log("resId:", resId);
 
   useEffect(() => {
     // You can fetch the menu data here using the resId from the URL params
@@ -13,7 +17,7 @@ const RestaurantMenu = () => {
   const fetchMenu = async () => {
     // Fetch menu data logic
     const data = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9405997&lng=77.5737633&restaurantId=1468&catalog_qa=undefined&submitAction=ENTER#"
+      `https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9405997&lng=77.5737633&restaurantId=${resId}&catalog_qa=undefined&submitAction=ENTER#`
     );
 
     const json = await data.json();
@@ -48,7 +52,7 @@ const RestaurantMenu = () => {
 
       <h2>Menu</h2>
       <div>
-        {itemCards.map((item) => {
+        {(itemCards || []).map((item) => {
           const info = item.card.info;
           return (
             <div className="menu-item" key={info.id}>
