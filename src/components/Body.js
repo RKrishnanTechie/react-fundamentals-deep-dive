@@ -7,6 +7,7 @@ const BodyComponent = () => {
     const [listOfRestaurants, setListOfRestaurants] = useState([]); // State variable to hold restaurant data
     const [searchText, setSearchText] = useState(""); // State variable to hold search text
     const [filteredRestaurants, setFilteredRestaurants] = useState([]); // State variable to hold filtered restaurant data      
+    
     useEffect(() => {
      fetchData();
     },[])
@@ -20,6 +21,8 @@ const BodyComponent = () => {
         setFilteredRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || []); // filtered list is same as original list at the beginning
         } catch (error){
            console.error("Failed to fetch restaurants:", error);
+        setListOfRestaurants([]); // safe fallback to empty array
+        setFilteredRestaurants([]); // safe fallback to empty array
         }
          }
 
@@ -41,7 +44,7 @@ const BodyComponent = () => {
 
       <button className="btn-filter" onClick={() => {
         const filteredList = listOfRestaurants.filter(
-          (res) => Number(res.info.avgRating) > 4.5 
+          (res) => Number(res.info.avgRating) > 4.3
         );
         setFilteredRestaurants(filteredList);
       }}>
