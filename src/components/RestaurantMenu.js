@@ -1,88 +1,90 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Shimmer from "./Shimmer";
+import { getRestaurantMenuProxyUrl } from "../utils/constants";
+import { mockMenuData } from "../mocks/restaurantMenu";
 
 const RestaurantMenu = () => {
   const [menu, setMenu] = useState(null);
-
-    const { resId } = useParams();
-    console.log("resId:", resId);
+  const { resId } = useParams();
+  
+  console.log("resId:", resId);
 
   useEffect(() => {
-    // You can fetch the menu data here using the resId from the URL params
     fetchMenu();
   }, []);
 
   const fetchMenu = async () => {
-    // Fetch menu data logic
-    const data = await fetch(
-      `https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9405997&lng=77.5737633&restaurantId=${resId}&catalog_qa=undefined&submitAction=ENTER#`
-    );
-
-    const json = await data.json();
-    console.log(json);
-    setMenu(json?.data);
+    try {
+      if (mockMenuData[resId]) {
+        console.log("Using mock menu data for restaurant:", resId);
+        setMenu(mockMenuData[resId].data);
+      } else {
+        console.log("Fetching from API for restaurant:", resId);
+        const data = await fetch(getRestaurantMenuProxyUrl(resId));
+        const json = await data.json();
+        setMenu(json?.data);
+      }
+    } catch (error) {
+      console.error("Error fetching menu:", error);
+      if (mockMenuData[resId]) {
+        setMenu(mockMenuData[resId].data);
+      }
+    }
   };
 
-  if (!menu) {
-    return <Shimmer />;
-  }
+  if (!menu) return <div>Loading...</div>;
 
-  console.log("MENU:", menu);
+  // Extract restaurant info from the first card
+  const restaurantInfo = menu?.cards?.find(
+    (card) => card?.card?.card?.info
+  )?.card?.card?.info;
 
-  // Extract restaurant info and menu items using optional chaining
-  const { name, areaName, costForTwoMessage, avgRating, cuisines } =
-    menu?.cards[2]?.card?.card?.info || {};
+  const { 
+    name = "Restaurant", 
+    cuisines = [], 
+    costForTwoMessage = "N/A", 
+    avgRating = "N/A" 
+  } = restaurantInfo || {};
 
-  const { itemCards } =
-    menu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card ||
-    [];
+  // Extract menu items
+  const menuItems = menu?.cards?.find(
+    (card) => card?.groupedCard
+  )?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
 
-  console.log("ITEM CARDS:", itemCards);
   return (
     <div>
       <h1>{name}</h1>
-      <h2>{areaName}</h2>
       <ul>
         <li>{costForTwoMessage}</li>
         <li>{avgRating} ratings</li>
-        <li>{cuisines.join(",")}</li>
+        <li>{cuisines.join(", ")}</li>
       </ul>
 
       <h2>Menu</h2>
-      <div>
-        {(itemCards || []).map((item) => {
-          const info = item.card.info;
+      {menuItems.map((item, index) => {
+        const category = item?.card?.card;
+        
+        if (category?.itemCards) {
           return (
-            <div className="menu-item" key={info.id}>
-              <div className="menu-details">
-                <h3>{info.name}</h3>
-                <div className="menu-price-rating">
-                  <span className="menu-price">
-                    ₹{(info.price || info.defaultPrice) / 100}
-                  </span>
-                  {info.ratings?.aggregatedRating?.rating && (
-                    <span className="menu-rating">
-                      ★ {info.ratings.aggregatedRating.rating}
-                    </span>
-                  )}
-                </div>
-                {info.description && (
-                  <p className="menu-desc">{info.description}</p>
-                )}
-              </div>
-              <div className="menu-actions">
-                <img
-                  className="menu-img"
-                  src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_150,h_120,c_fit/${info.imageId}`}
-                  alt={info.name}
-                />
-              </div>
+            <div key={index}>
+              <h3>{category.title}</h3>
+              <ul>
+                {category.itemCards.map((dish) => {
+                  const dishInfo = dish?.card?.info;
+                  return (
+                    <li key={dishInfo?.id}>
+                      <strong>{dishInfo?.name}</strong> - ₹{(dishInfo?.price / 100).toFixed(2)}
+                      <br />
+                      <small>{dishInfo?.description}</small>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           );
-        })}
-      </div>
+        }
+        return null;
+      })}
     </div>
   );
 };
